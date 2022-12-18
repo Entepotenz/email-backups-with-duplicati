@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+export MEGA_USERNAME="XXX"
+export MEGA_PASSWORD="XXX"
+export DUPLICATI_ENCRYPTION_PASSWORD="XXX"

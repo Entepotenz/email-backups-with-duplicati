@@ -1,0 +1,5 @@
+scripts/TEMP_DIR
+scripts/backups
+
+secrets/pass_offlineimap.sh
+secrets/pass_duplicati.sh
