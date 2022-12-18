@@ -24,7 +24,7 @@ offlineimap is intentionally configured in "readonly" mode because we want to av
 
 ### advanced usage:
 - you can avoid the `duplicati-cli repair` step if you extend the docker command to mount a folder for the duplicati meta data (`/config`)
-- Executing the "repair"-step has the advantage that this setup is kind of stateless (ignoring the pass.sh files for credentials). This has the disadvantage that if someone modifies / deletes your data you might not notice as easily the problem.
+- Executing the "repair"-step has the advantage that this setup is kind of stateless (ignoring the pass.sh files for credentials). This has the disadvantage that if someone modifies / deletes your data you might not notice as easily.
 
 ## warning:
 - the passwords are stored in **plaintext** in the `secrets/pass_*.sh` files
