@@ -1,5 +1,7 @@
-scripts/TEMP_DIR
-scripts/backups
+run-one-shot-job/scripts/TEMP_DIR
+run-one-shot-job/scripts/backups
 
-secrets/pass_offlineimap.sh
-secrets/pass_duplicati.sh
+run-one-shot-job/secrets/pass_offlineimap.sh
+run-one-shot-job/secrets/pass_duplicati.sh
+
+run-docker-compose/.env

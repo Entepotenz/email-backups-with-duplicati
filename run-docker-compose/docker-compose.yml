@@ -1,0 +1,26 @@
+---
+version: "3.9"
+
+# from: https://github.com/htpcBeginner/docker-traefik/blob/master/docker-compose-t2.yml
+x-common-keys-core: &common-keys-core
+  security_opt:
+    - no-new-privileges:true
+
+services:
+  offlineimap:
+    <<: *common-keys-core # See EXTENSION FIELDS at the top
+    build:
+      context: ./offlineimap-docker
+      dockerfile: Dockerfile
+    # restart: unless-stopped
+    volumes:
+      - offlineimap_volume:/home/imapuser/mail:rw
+      - ./offlineimap-docker/config_standard.conf:/home/imapuser/.offlineimaprc:ro
+    environment:
+      - REMOTE_HOST=$REMOTE_HOST
+      - REMOTE_USER=$REMOTE_USER
+      - REMOTE_PASS=$REMOTE_PASS
+
+volumes:
+  offlineimap_volume:
+      external: false
