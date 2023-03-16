@@ -40,6 +40,9 @@ VOLUME ["/data"]
 COPY root/ /
 COPY config_standard.conf /defaults/offlineimap.conf
 
+# Using CMD is a convenient way to take advantage of the overlay.
+# Your CMD can be given at build time in the Dockerfile, or at run time on the command line, either way is fine.
+# It will be run as a normal process in the environment set up by s6; when it fails or exits, the container will shut down cleanly and exit
 CMD [ "/etc/s6-overlay/s6-rc.d/svc-offlineimap/run" ]
 
 ENTRYPOINT ["/init"]
