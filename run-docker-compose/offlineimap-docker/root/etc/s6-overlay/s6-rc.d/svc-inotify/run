@@ -1,0 +1,11 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+# starting inotify to watch /config/offlineimap.conf and restart offlineimap if changed.
+while inotifywait -e modify /config/offlineimap.conf; do
+    cp /config/offlineimap.conf /offlineimap.conf
+    lsiown abc:abc /offlineimap.conf
+    chmod 600 /offlineimap.conf
+    s6-svc -h /run/service/svc-offlineimap
+    echo "offlineimap has been restarted"
+done

@@ -14,9 +14,11 @@ services:
       dockerfile: Dockerfile
     # restart: unless-stopped
     volumes:
-      - offlineimap_volume:/home/imapuser/mail:rw
-      - ./offlineimap-docker/config_standard.conf:/home/imapuser/.offlineimaprc:ro
+      - offlineimap_volume:/data:rw
+      - ./offlineimap-docker/config_standard.conf:/config/offlineimap.conf:ro
     environment:
+      - PUID=$PUID
+      - PGID=$PGID
       - REMOTE_HOST=$REMOTE_HOST
       - REMOTE_USER=$REMOTE_USER
       - REMOTE_PASS=$REMOTE_PASS
