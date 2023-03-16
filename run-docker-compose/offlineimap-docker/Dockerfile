@@ -40,4 +40,6 @@ VOLUME ["/data"]
 COPY root/ /
 COPY config_standard.conf /defaults/offlineimap.conf
 
+CMD [ "/etc/s6-overlay/s6-rc.d/svc-offlineimap/run" ]
+
 ENTRYPOINT ["/init"]
