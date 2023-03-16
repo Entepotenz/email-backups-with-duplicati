@@ -19,6 +19,7 @@ services:
     environment:
       - PUID=$PUID
       - PGID=$PGID
+      - DISABLE_FILE_WATCH_ON_OFFLINEIMAP_CONF=false # default: false
       - REMOTE_HOST=$REMOTE_HOST
       - REMOTE_USER=$REMOTE_USER
       - REMOTE_PASS=$REMOTE_PASS
