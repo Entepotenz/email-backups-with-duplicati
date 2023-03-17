@@ -3,6 +3,7 @@
 
 set -o errexit
 set -o pipefail
+
 if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 
 if [[ -z "${DISABLE_FILE_WATCH_ON_OFFLINEIMAP_CONF}" ]]; then
@@ -13,7 +14,7 @@ fi
 if [ "$DISABLE_FILE_WATCH_ON_OFFLINEIMAP_CONF" == "false" ] ; then
     while inotifywait -e modify /config/offlineimap.conf; do
         cp /config/offlineimap.conf /offlineimap.conf
-        lsiown abc:abc /offlineimap.conf
+        chown abc:abc /offlineimap.conf
         chmod 600 /offlineimap.conf
         s6-svc -h /run/service/svc-offlineimap
         echo "offlineimap has been restarted"

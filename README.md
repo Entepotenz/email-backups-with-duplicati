@@ -41,3 +41,14 @@ offlineimap is intentionally configured in "readonly" mode because we want to av
     - fedora docker image: https://hub.docker.com/_/fedora
 - [duplicati](https://www.duplicati.com/)
     - official duplicati docker image: https://hub.docker.com/r/duplicati/duplicati/
+
+# How to read Maildir files
+- use `mutt`
+- launch mutt with folders
+    - `mutt -f /data/Inbox`
+    - `mutt -f /data/Sent`
+
+## alternative use `mbox` format
+- use this tool to convert Maildir format to convert to `.mbox`
+    - https://github.com/bluebird75/maildir2mbox
+- you can directly open the Mails using Gnome Evolution
