@@ -1,7 +1,29 @@
-FROM docker.io/library/fedora:latest
+FROM docker.io/library/fedora:latest as base
+
+# s6-overlay auto selection of architecture inspired from https://github.com/padhi-homelab/docker_s6-overlay/blob/4cdb04131112a8d89e7ed2102083a062c8168d89/Dockerfile
+ARG TARGETARCH
+
+FROM base AS base-amd64
+ENV S6_OVERLAY_ARCH=x86_64
+
+FROM base AS base-386
+ENV S6_OVERLAY_ARCH=i686
+
+FROM base AS base-arm64
+ENV S6_OVERLAY_ARCH=aarch64
+
+FROM base AS base-armv7
+ENV S6_OVERLAY_ARCH=armhf
+
+FROM base AS base-armv6
+ENV S6_OVERLAY_ARCH=arm
+
+FROM base AS base-ppc64le
+ENV S6_OVERLAY_ARCH=ppc64le
+
+FROM base-${TARGETARCH}${TARGETVARIANT}
 
 ARG S6_OVERLAY_VERSION=3.1.4.1
-ARG S6_OVERLAY_ARCH="x86_64"
 
 RUN dnf -y update \
     && dnf install -y xz offlineimap inotify-tools \
@@ -9,15 +31,22 @@ RUN dnf -y update \
 
 # add s6 overlay
 ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz /tmp
-RUN tar -C / -Jxpf /tmp/s6-overlay-noarch.tar.xz
+ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz.sha256 /tmp
+RUN tar -C / -Jxpf "/tmp/s6-overlay-noarch.tar.xz"
 ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-${S6_OVERLAY_ARCH}.tar.xz /tmp
-RUN tar -C / -Jxpf /tmp/s6-overlay-${S6_OVERLAY_ARCH}.tar.xz
+ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-${S6_OVERLAY_ARCH}.tar.xz.sha256 /tmp
+RUN tar -C / -Jxpf "/tmp/s6-overlay-${S6_OVERLAY_ARCH}.tar.xz"
 
 # add s6 optional symlinks
 ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-symlinks-noarch.tar.xz /tmp
-RUN tar -C / -Jxpf /tmp/s6-overlay-symlinks-noarch.tar.xz
+ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-symlinks-noarch.tar.xz.sha256 /tmp
+RUN tar -C / -Jxpf "/tmp/s6-overlay-symlinks-noarch.tar.xz"
 ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-symlinks-arch.tar.xz /tmp
-RUN tar -C / -Jxpf /tmp/s6-overlay-symlinks-arch.tar.xz
+ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-symlinks-arch.tar.xz.sha256 /tmp
+RUN tar -C / -Jxpf "/tmp/s6-overlay-symlinks-arch.tar.xz"
+
+# Verifying s6-overlay Downloads
+RUN cd /tmp && sha256sum -c *.sha256
 
 RUN groupmod -g 1000 users && \
     useradd -u 911 -U -d /config -s /bin/false --home /home/abc abc && \
