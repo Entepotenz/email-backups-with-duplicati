@@ -23,7 +23,7 @@ ENV S6_OVERLAY_ARCH=ppc64le
 
 FROM base-${TARGETARCH}${TARGETVARIANT}
 
-ARG S6_OVERLAY_VERSION=3.1.4.1
+ARG S6_OVERLAY_VERSION=3.1.4.2
 
 RUN dnf -y update \
     && dnf install -y xz offlineimap inotify-tools \
