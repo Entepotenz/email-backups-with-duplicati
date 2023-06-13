@@ -1,0 +1,12 @@
+name: Github Action with a cronjob trigger
+on:
+  schedule:
+    - cron: "0 0 * * 0"
+
+jobs:
+  keep-github-actions-alive:
+    name: Cronjob based GitHub action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: gautamkrishnar/keepalive-workflow@790c7f09285a59b09bb578c85e271c6ff2af97c4 # v1.1.0
