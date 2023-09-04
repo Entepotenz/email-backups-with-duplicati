@@ -10,7 +10,7 @@ jobs:
     name: Cronjob based GitHub action
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: git workflow keepalive
         env:
           COMMIT_USER_EMAIL: "github-action-keepalive-bot@github.com"
