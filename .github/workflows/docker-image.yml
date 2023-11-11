@@ -70,7 +70,7 @@ jobs:
             echo "run_jobs=false" >> "$GITHUB_OUTPUT"
             echo "### Everything is already up-to-date!" >> "$GITHUB_STEP_SUMMARY"
           fi
-          { 
+          {
             echo "IMAGE_NEEDS_UPDATE:='$IMAGE_NEEDS_UPDATE'"
             echo "GIT_EVENT_NAME:='$GIT_EVENT_NAME'"
           } >> "$GITHUB_STEP_SUMMARY"
@@ -125,3 +125,5 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
