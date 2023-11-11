@@ -46,7 +46,8 @@ ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLA
 RUN tar -C / -Jxpf "/tmp/s6-overlay-symlinks-arch.tar.xz"
 
 # Verifying s6-overlay Downloads
-RUN cd /tmp && sha256sum -c *.sha256
+# hadolint ignore=DL3003
+RUN cd /tmp && sha256sum -c -- *.sha256
 
 RUN groupmod -g 1000 users && \
     useradd -u 911 -U -d /config -s /bin/false --home /home/abc abc && \
