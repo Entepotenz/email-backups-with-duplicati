@@ -1,0 +1,21 @@
+---
+
+name: Check for linting YML
+
+# yamllint disable-line rule:truthy
+on:
+  push:
+    paths:
+      - '**.yml'
+      - '**.yaml'
+permissions: read-all
+jobs:
+  lint-shell-script:
+    name: run yamllint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run yamllint - *.yml
+        run: yamllint -c .github/linters/yamllint_config.yaml ./

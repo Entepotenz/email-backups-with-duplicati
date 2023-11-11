@@ -1,0 +1,27 @@
+---
+
+name: Check for linting github action
+
+# yamllint disable-line rule:truthy
+on:
+  push:
+    paths:
+      - '.github/**.yml'
+      - '.github/**.yaml'
+permissions: read-all
+jobs:
+  lint-shell-script:
+    name: run github action linter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Go
+        uses: actions/setup-go@v4
+      - name: Display Go version
+        run: go version
+      - name: install actionlint
+        run: go install github.com/rhysd/actionlint/cmd/actionlint@latest
+      - name: run actionlint
+        run: actionlint

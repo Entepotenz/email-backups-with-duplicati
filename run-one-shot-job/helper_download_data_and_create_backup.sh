@@ -5,7 +5,8 @@ set -o pipefail
 set -o nounset
 if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 
-readonly SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+readonly SCRIPT_DIR
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 readonly BACKUPS_FOLDER="$SCRIPT_DIR/scripts/backups"
 trap 'rm -rf -- "$BACKUPS_FOLDER"' EXIT SIGTERM SIGINT
 

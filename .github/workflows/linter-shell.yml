@@ -1,0 +1,20 @@
+---
+
+name: Check for linting shell
+
+# yamllint disable-line rule:truthy
+on:
+  push:
+    paths:
+      - '**.sh'
+permissions: read-all
+jobs:
+  lint-shell-script:
+    name: run shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@00cae500b08a931fb5698e11e79bfbd38e612a38  # 2.0.0

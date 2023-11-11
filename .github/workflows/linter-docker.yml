@@ -1,0 +1,23 @@
+---
+
+name: Check for linting Dockerfiles
+
+# yamllint disable-line rule:truthy
+on:
+  push:
+    paths:
+      - '**Dockerfile**'
+permissions: read-all
+jobs:
+  lint-hadolint:
+    name: run hadolint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+          recursive: true
+          config: .github/linters/.hadolint.yaml

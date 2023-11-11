@@ -5,11 +5,13 @@ set -o pipefail
 set -o nounset
 if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 
-readonly SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+readonly SCRIPT_DIR
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 readonly TEMP_DIR="$SCRIPT_DIR/TEMP_DIR"
 mkdir -p "$TEMP_DIR"
 trap 'rm -rf -- "$TEMP_DIR"' EXIT SIGTERM SIGINT
 
+# shellcheck disable=SC1091
 source "$SCRIPT_DIR/../secrets/pass_offlineimap.sh"
 
 pull_data_from_imap () {
@@ -23,6 +25,7 @@ pull_data_from_imap () {
     touch "$CONFIG_PATH_OFFLINEIMAP_ENVSUBST"
     chmod u=rw,o=,g= "$CONFIG_PATH_OFFLINEIMAP_ENVSUBST"
 
+    # shellcheck disable=SC2016
     REMOTE_HOST="$REMOTE_HOST" \
     REMOTE_USER="$REMOTE_USER" \
     REMOTE_PASS="$REMOTE_PASS" \

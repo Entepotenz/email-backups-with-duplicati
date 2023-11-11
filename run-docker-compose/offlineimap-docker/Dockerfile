@@ -21,10 +21,12 @@ ENV S6_OVERLAY_ARCH=arm
 FROM base AS base-ppc64le
 ENV S6_OVERLAY_ARCH=ppc64le
 
+# hadolint ignore=DL3006
 FROM base-${TARGETARCH}${TARGETVARIANT}
 
 ARG S6_OVERLAY_VERSION=3.1.6.0
 
+# hadolint ignore=DL3041
 RUN dnf -y update \
     && dnf install -y xz offlineimap inotify-tools \
     && dnf clean all
