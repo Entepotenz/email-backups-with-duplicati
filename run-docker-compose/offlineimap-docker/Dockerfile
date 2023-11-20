@@ -24,7 +24,7 @@ ENV S6_OVERLAY_ARCH=ppc64le
 # hadolint ignore=DL3006
 FROM base-${TARGETARCH}${TARGETVARIANT}
 
-ARG S6_OVERLAY_VERSION=3.1.6.0
+ARG S6_OVERLAY_VERSION=3.1.6.2
 
 # hadolint ignore=DL3041
 RUN dnf -y update \
