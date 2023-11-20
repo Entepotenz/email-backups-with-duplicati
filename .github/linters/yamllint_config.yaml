@@ -5,8 +5,8 @@ rules:
   line-length:
     max: 150
     level: warning
-  # don't bother me with this rule
-  new-line-at-end-of-file: disable
+  comments:
+    min-spaces-from-content: 1
 
 ignore:
   - node_modules
