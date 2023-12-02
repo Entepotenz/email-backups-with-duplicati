@@ -13,35 +13,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: git workflow keepalive
-        env:
-          COMMIT_USER_EMAIL: "github-action-keepalive-bot@github.com"
-          COMMIT_USER_NAME: "GitHub Action - Workflow keepalive"
-          COMMIT_MESSAGE: "GitHub Action - Workflow keepalive"
-          TIME_ELAPSED_THRESHOLD_IN_DAYS: 50
-        run: |
-          git --version
-          git config user.name "$COMMIT_USER_NAME"
-          git config user.email "$COMMIT_USER_EMAIL"
-
-          # Get the last commit date for the current branch
-          LAST_COMMIT_DATE=$(git log -1 --format="%ct")
-
-          CURRENT_DATE=$(date "+%s")
-
-          TIME_DIFFERENCE=$((CURRENT_DATE - LAST_COMMIT_DATE))
-
-          DAYS_AGO=$((TIME_DIFFERENCE / (60 * 60 * 24)))
-
-          echo "Last commit is '$DAYS_AGO' days ago"
-
-          if [ "$DAYS_AGO" -gt "$TIME_ELAPSED_THRESHOLD_IN_DAYS" ]; then
-            echo "$DAYS_AGO > $TIME_ELAPSED_THRESHOLD_IN_DAYS -> add empty commit"
-
-            git commit --allow-empty -m "$COMMIT_MESSAGE"
-            git push
-
-            echo "done"
-          else
-            echo "$DAYS_AGO <= $TIME_ELAPSED_THRESHOLD_IN_DAYS -> nothing to do"
-          fi
+      - name: Keep your GitHub Actions alive automatically
+        uses: Entepotenz/keep-github-actions-alive-min-dependencies@v1
