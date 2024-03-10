@@ -8,7 +8,7 @@ x-common-keys-core: &common-keys-core
 
 services:
   offlineimap:
-    <<: *common-keys-core  # See EXTENSION FIELDS at the top
+    <<: *common-keys-core # See EXTENSION FIELDS at the top
     build:
       context: ./offlineimap-docker
       dockerfile: Dockerfile
@@ -19,7 +19,7 @@ services:
     environment:
       - PUID=$PUID
       - PGID=$PGID
-      - DISABLE_FILE_WATCH_ON_OFFLINEIMAP_CONF=false  # default: false
+      - DISABLE_FILE_WATCH_ON_OFFLINEIMAP_CONF=false # default: false
       - REMOTE_HOST=$REMOTE_HOST
       - REMOTE_USER=$REMOTE_USER
       - REMOTE_PASS=$REMOTE_PASS

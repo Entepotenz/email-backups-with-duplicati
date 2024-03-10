@@ -9,15 +9,17 @@ name: Create and publish a Docker image
 # yamllint disable-line rule:truthy
 on:
   schedule:
-    - cron: "5 4 * * 0"  # At 04:05 on Sunday
+    - cron: "5 4 * * 0" # At 04:05 on Sunday
   push:
     branches:
-      - "**"
+      - main
+      - master
     tags:
       - "v*.*.*"
   pull_request:
     branches:
-      - "main"
+      - main
+      - master
 
 # cancel a currently running workflow from the same PR, branch or tag when a new workflow is triggered
 # source: https://stackoverflow.com/questions/66335225/how-to-cancel-previous-runs-in-the-pr-when-you-push-new-commitsupdate-the-curre/67939898#67939898
@@ -51,7 +53,7 @@ jobs:
 
       - name: Docker Image Update Checker
         id: baseupdatecheck
-        uses: georg-jung/docker-image-update-checker@d338fc30c0b65a077d21edbaff00d3c850ffeca8  # main
+        uses: georg-jung/docker-image-update-checker@d338fc30c0b65a077d21edbaff00d3c850ffeca8 # main
         with:
           base-image: ${{ env.BASE_IMAGE }}
           image: ${{ env.REGISTRY_GITHUB }}/${{ steps.string_lower_case.outputs.lowercase }}:latest

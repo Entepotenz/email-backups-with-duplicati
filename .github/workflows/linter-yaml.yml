@@ -1,13 +1,12 @@
 ---
-
 name: Check for linting YML
 
 # yamllint disable-line rule:truthy
 on:
   push:
     paths:
-      - '**.yml'
-      - '**.yaml'
+      - "**.yml"
+      - "**.yaml"
 permissions: read-all
 jobs:
   lint-shell-script:

@@ -5,3 +5,5 @@ run-one-shot-job/secrets/pass_offlineimap.sh
 run-one-shot-job/secrets/pass_duplicati.sh
 
 run-docker-compose/.env
+
+megalinter-reports/

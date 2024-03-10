@@ -1,12 +1,11 @@
 ---
-
 name: Check for linting Dockerfiles
 
 # yamllint disable-line rule:truthy
 on:
   push:
     paths:
-      - '**Dockerfile**'
+      - "**Dockerfile**"
 permissions: read-all
 jobs:
   lint-hadolint:

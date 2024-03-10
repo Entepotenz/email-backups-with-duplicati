@@ -6,14 +6,14 @@ set -o nounset
 if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 
 readonly SCRIPT_DIR
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 # shellcheck disable=SC1091
 source "$SCRIPT_DIR/../secrets/pass_duplicati.sh"
 
 docker run --rm \
-    -v "$SCRIPT_DIR/backups":/source \
-    duplicati/duplicati bash -c "\
+	-v "$SCRIPT_DIR/backups":/source \
+	duplicati/duplicati bash -c "\
         duplicati-cli repair \"mega:///duplicati_imap_backup/?auth-username=$MEGA_USERNAME&auth-password=$MEGA_PASSWORD\" \
             --dbpath=/config/QKIXOAOTCP.sqlite \
             --passphrase=\"$DUPLICATI_ENCRYPTION_PASSWORD\"; \
