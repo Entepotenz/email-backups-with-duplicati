@@ -1,4 +1,6 @@
 # email-backups-with-duplicati
+[![MegaLinter](https://github.com/Entepotenz/email-backups-with-duplicati/actions/workflows/megalinter.yml/badge.svg)](https://github.com/Entepotenz/email-backups-with-duplicati/actions/workflows/megalinter.yml)
+
 script to create a full backup of multiple mail accounts and create encrypted backups using duplicati.
 
 The mail backup is stored in the "Maildir" format. Many applications are supporting this format e.g. [mutt](http://www.mutt.org/)
