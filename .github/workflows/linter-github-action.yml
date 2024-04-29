@@ -12,6 +12,7 @@ jobs:
   lint-shell-script:
     name: run github action linter
     runs-on: ubuntu-latest
+    if: (!startsWith(github.event.pull_request.head.ref, 'dependabot/') && !startsWith(github.event.pull_request.head.ref, 'renovate/') && github.event.head_commit.author.username != 'renovate-bot')
     steps:
       - uses: actions/checkout@v4
         with:

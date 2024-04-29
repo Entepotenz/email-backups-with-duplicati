@@ -12,9 +12,8 @@ jobs:
   lint-shell-script:
     name: run yamllint
     runs-on: ubuntu-latest
+    if: (!startsWith(github.event.pull_request.head.ref, 'dependabot/') && !startsWith(github.event.pull_request.head.ref, 'renovate/') && github.event.head_commit.author.username != 'renovate-bot')
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - name: Run yamllint - *.yml
         run: yamllint -c .github/linters/yamllint_config.yaml ./
