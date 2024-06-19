@@ -53,7 +53,7 @@ jobs:
 
       - name: Docker Image Update Checker
         id: baseupdatecheck
-        uses: georg-jung/docker-image-update-checker@d338fc30c0b65a077d21edbaff00d3c850ffeca8 # main
+        uses: georg-jung/docker-image-update-checker@e1c8acbec9745b239af228fe7a1db75995a46a0c # main
         with:
           base-image: ${{ env.BASE_IMAGE }}
           image: ${{ env.REGISTRY_GITHUB }}/${{ steps.string_lower_case.outputs.lowercase }}:latest
