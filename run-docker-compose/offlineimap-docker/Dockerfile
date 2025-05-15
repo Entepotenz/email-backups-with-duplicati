@@ -25,7 +25,7 @@ ENV S6_OVERLAY_ARCH=ppc64le
 FROM base-${TARGETARCH}${TARGETVARIANT}
 
 # renovate: datasource=github-release depName=just-containers/s6-overlay versioning=regex:^v(?<major>\d+)(\.(?<minor>\d+))?(\.(?<patch>\d+)?(\.(?<build>\d+)))$
-ARG S6_OVERLAY_VERSION=v3.2.0.2
+ARG S6_OVERLAY_VERSION=v3.2.1.0
 
 # hadolint ignore=DL3041
 RUN dnf -y update \
