@@ -15,9 +15,9 @@
     {
       "customType": "regex",
       "datasourceTemplate": "github-releases",
-      "fileMatch": [
-        "(^|/|\\.)([Dd]ocker|[Cc]ontainer)file.*$",
-        "(^|/)([Dd]ocker|[Cc]ontainer)file[^/]*$"
+      "managerFilePatterns": [
+        "/(^|/|\\.)([Dd]ocker|[Cc]ontainer)file.*$/",
+        "/(^|/)([Dd]ocker|[Cc]ontainer)file[^/]*$/"
       ],
       "matchStrings": [
         "#\\s?renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s.*?ARG\\s+S6_OVERLAY_VERSION=\\s*(?<currentValue>.*)"
