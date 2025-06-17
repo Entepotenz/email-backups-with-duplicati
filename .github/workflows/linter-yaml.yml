@@ -14,6 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     if: (!startsWith(github.event.pull_request.head.ref, 'dependabot/') && !startsWith(github.event.pull_request.head.ref, 'renovate/') && github.event.head_commit.author.username != 'renovate-bot')
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Run yamllint - *.yml
         run: yamllint -c .github/linters/yamllint_config.yaml ./
