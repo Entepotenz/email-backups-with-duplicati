@@ -12,6 +12,6 @@ jobs:
     name: Cronjob based GitHub action
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Keep your GitHub Actions alive automatically
-        uses: Entepotenz/keep-github-actions-alive-min-dependencies@v1
+        uses: Entepotenz/keep-github-actions-alive-min-dependencies@2b8591b952e0448a961600c336393cdcd4c1a9b6 # v1
