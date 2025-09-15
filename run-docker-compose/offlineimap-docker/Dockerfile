@@ -1,4 +1,4 @@
-FROM docker.io/library/fedora:latest as base
+FROM docker.io/library/fedora:latest@sha256:6af051ad0a294182c3a957961df6203d91f643880aa41c2ffe3d1302e7505890 as base
 
 # s6-overlay auto selection of architecture inspired from https://github.com/padhi-homelab/docker_s6-overlay/blob/4cdb04131112a8d89e7ed2102083a062c8168d89/Dockerfile
 ARG TARGETARCH
