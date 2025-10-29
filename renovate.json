@@ -5,12 +5,6 @@
     "helpers:pinGitHubActionDigests",
     "security:openssf-scorecard"
   ],
-  "enabledManagers": [
-    "custom.regex",
-    "docker-compose",
-    "dockerfile",
-    "github-actions"
-  ],
   "customManagers": [
     {
       "customType": "regex",
