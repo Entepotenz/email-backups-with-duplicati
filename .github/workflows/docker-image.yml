@@ -44,7 +44,7 @@ jobs:
       condition_met: ${{ steps.set_output.outputs.run_jobs }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v5
 
       - id: string_lower_case
         uses: Entepotenz/change-string-case-action-min-dependencies@v1
@@ -89,7 +89,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v5
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
