@@ -14,4 +14,4 @@ jobs:
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       - name: Keep your GitHub Actions alive automatically
-        uses: Entepotenz/keep-github-actions-alive-min-dependencies@v1
+        uses: Entepotenz/keep-github-actions-alive-min-dependencies@2b8591b952e0448a961600c336393cdcd4c1a9b6 # v1
