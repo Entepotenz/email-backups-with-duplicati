@@ -8,8 +8,6 @@ name: Create and publish a Docker image
 
 # yamllint disable-line rule:truthy
 on:
-  schedule:
-    - cron: "5 4 * * 0" # At 04:05 on Sunday
   push:
     branches:
       - main
@@ -34,55 +32,8 @@ env:
   BASE_IMAGE: "library/fedora:latest"
 
 jobs:
-  check-pre-condition:
-    name: evaluate if container should be build
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      contents: read
-      packages: read
-    outputs:
-      condition_met: ${{ steps.set_output.outputs.run_jobs }}
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
-
-      - id: string_lower_case
-        uses: Entepotenz/change-string-case-action-min-dependencies@5278bdd8405cb5124456eedb559582f1839fcc86 # v1
-        with:
-          string: ${{ env.IMAGE_NAME }}
-
-      - name: Docker Image Update Checker
-        id: baseupdatecheck
-        uses: georg-jung/docker-image-update-checker@d338fc30c0b65a077d21edbaff00d3c850ffeca8 # main
-        with:
-          base-image: ${{ env.BASE_IMAGE }}
-          image: ${{ env.REGISTRY_GITHUB }}/${{ steps.string_lower_case.outputs.lowercase }}:latest
-          verbose: true
-          github_token: ${{ secrets.TOKEN }}
-
-      - name: determine if we should build
-        id: set_output
-        env:
-          IMAGE_NEEDS_UPDATE: ${{ steps.baseupdatecheck.outputs.needs-updating }}
-          GIT_EVENT_NAME: ${{ github.event_name }}
-        run: |
-          if [ "$IMAGE_NEEDS_UPDATE" = "true" ] || [ "$GIT_EVENT_NAME" = "push" ] || [ "$GIT_EVENT_NAME" = "pull_request" ]; then
-            echo "run_jobs=true" >> "$GITHUB_OUTPUT"
-            echo "### We need to build a new docker image! :rocket:" >> "$GITHUB_STEP_SUMMARY"
-          else
-            echo "run_jobs=false" >> "$GITHUB_OUTPUT"
-            echo "### Everything is already up-to-date!" >> "$GITHUB_STEP_SUMMARY"
-          fi
-          {
-            echo "IMAGE_NEEDS_UPDATE:='$IMAGE_NEEDS_UPDATE'"
-            echo "GIT_EVENT_NAME:='$GIT_EVENT_NAME'"
-          } >> "$GITHUB_STEP_SUMMARY"
-
   build-and-push-image:
     runs-on: ubuntu-latest
-    needs: [check-pre-condition]
-    if: needs.check-pre-condition.outputs.condition_met == 'true'
     timeout-minutes: 20
     permissions:
       contents: read
