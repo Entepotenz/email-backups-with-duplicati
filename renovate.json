@@ -1,9 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:best-practices",
-    "helpers:pinGitHubActionDigests",
-    "security:openssf-scorecard"
+    "github>Entepotenz/renovate_custom_presets//default.json",
+    "github>Entepotenz/renovate_custom_presets//group-github-actions.json",
   ],
   "customManagers": [
     {
