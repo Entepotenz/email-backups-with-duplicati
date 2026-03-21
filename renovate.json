@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>Entepotenz/renovate_custom_presets//default.json",
-    "github>Entepotenz/renovate_custom_presets//group-github-actions.json",
+    "github>Entepotenz/renovate_custom_presets//group-github-actions.json"
   ],
   "customManagers": [
     {
